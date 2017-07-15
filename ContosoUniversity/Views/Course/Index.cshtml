@@ -32,6 +32,9 @@
         <th>
             Department
         </th>
+        <th>
+            Partner            
+        </th>
         <th></th>
     </tr>
 
@@ -49,6 +52,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Department.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Partner.Name)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.CourseID }) |

@@ -26,5 +26,7 @@ namespace ContosoUniversity.DAL
 
             modelBuilder.Entity<Department>().MapToStoredProcedures();
         }
+
+        public System.Data.Entity.DbSet<ContosoUniversity.Models.Partner> Partners { get; set; }
     }
 }

@@ -50,12 +50,13 @@ namespace ContosoUniversity.Controllers
         public ActionResult Create()
         {
             PopulateDepartmentsDropDownList();
+            PopulatePartnersDropDownList();
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CourseID,Title,Credits,DepartmentID")]Course course)
+        public ActionResult Create([Bind(Include = "CourseID,Title,Credits,DepartmentID, PartnerID")]Course course)
         {
             try
             {
@@ -72,6 +73,7 @@ namespace ContosoUniversity.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
             PopulateDepartmentsDropDownList(course.DepartmentID);
+            PopulatePartnersDropDownList(course.PartnerID);
             return View(course);
         }
 
@@ -87,6 +89,7 @@ namespace ContosoUniversity.Controllers
                 return HttpNotFound();
             }
             PopulateDepartmentsDropDownList(course.DepartmentID);
+            PopulatePartnersDropDownList(course.PartnerID);
             return View(course);
         }
 
@@ -100,7 +103,7 @@ namespace ContosoUniversity.Controllers
             }
             var courseToUpdate = db.Courses.Find(id);
             if (TryUpdateModel(courseToUpdate, "",
-               new string[] { "Title", "Credits", "DepartmentID" }))
+               new string[] { "Title", "Credits", "DepartmentID", "PartnerID" }))
             {
                 try
                 {
@@ -115,6 +118,7 @@ namespace ContosoUniversity.Controllers
                 }
             }
             PopulateDepartmentsDropDownList(courseToUpdate.DepartmentID);
+            PopulatePartnersDropDownList(courseToUpdate.PartnerID);
             return View(courseToUpdate);
         }
 
@@ -124,6 +128,14 @@ namespace ContosoUniversity.Controllers
                                    orderby d.Name
                                    select d;
             ViewBag.DepartmentID = new SelectList(departmentsQuery, "DepartmentID", "Name", selectedDepartment);
+        }
+
+        private void PopulatePartnersDropDownList(object selectedPartner = null)
+        {
+            var partnersQuery = from p in db.Partners
+                                   orderby p.Name
+                                   select p;
+            ViewBag.PartnerID = new SelectList(partnersQuery, "PartnerID", "Name", selectedPartner);
         }
 
 
