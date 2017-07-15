@@ -110,22 +110,10 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            /*
-            IQueryable<Course> courses = db.Courses
-            .Where(c => c.PartnerID == id)
-            .OrderBy(d => d.CourseID)
-            .Include(d => d.Partner);
-            var sql = courses.ToString();
-            if (courses.ToList().Count > 0)
-            {
-                error message
-            }
-            else {*/
-                Partner partner = db.Partners.Find(id);
-                db.Partners.Remove(partner);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-           // }
+            Partner partner = db.Partners.Find(id);
+            db.Partners.Remove(partner);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
