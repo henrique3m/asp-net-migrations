@@ -110,6 +110,7 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            /*
             IQueryable<Course> courses = db.Courses
             .Where(c => c.PartnerID == id)
             .OrderBy(d => d.CourseID)
@@ -117,17 +118,14 @@ namespace ContosoUniversity.Controllers
             var sql = courses.ToString();
             if (courses.ToList().Count > 0)
             {
-                ModelState.AddModelError(string.Empty,
-                "Unable to delete Partner. The are courses with specified Partner.");
-                ViewBag.ErrorMessage = "Unable to delete Partner. The are courses with specified Partner.";
-                return View();
+                error message
             }
-            else {
+            else {*/
                 Partner partner = db.Partners.Find(id);
                 db.Partners.Remove(partner);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+           // }
         }
 
         protected override void Dispose(bool disposing)
