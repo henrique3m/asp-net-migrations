@@ -1,1 +1,1 @@
-.Net MVC application using migrations.
+.Net MVC application with migrations.
