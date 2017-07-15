@@ -1,1 +1,1 @@
-# ContosoUniversity
+.Net MVC application with migrations.
